@@ -1,17 +1,17 @@
 # Happy coding 😎
 todos = [
   { "id"=> 1, "content" => "Fill the weekly feedback", "completed" => false},
-  { "id"=> 2, "content" => "Complete Ruby Basics 1", "completed" => false},
+  { "id"=> 2, "content" => "Complete Ruby Basics 1", "completed" => true},
   { "id"=> 3, "content" => "Complete Ruby Basics 2", "completed" => false},
   { "id"=> 4, "content" => "Complete Ruby Methods", "completed" => false},
   { "id"=> 5, "content" => "Do meditation", "completed" => false},
 ]
 
 # Main program
-def list_todos(todos)
+def list_todos(todos, completed = false)
   puts "------------------------Welcome to toDOS------------------------"
   todos.each do |todo|
-    puts "#{todo['id']}. #{todo['content']}"
+    puts "#{todo['id']}. #{todo['content']}" if todo["completed"] == completed
   end
 end
 
@@ -19,10 +19,6 @@ def print_menu
   puts "-" * 64
   puts "add | list | completed | toggle | delete | exit"
   puts "\n"
-end
-
-def method_name
-  
 end
 
 list_todos(todos)
@@ -33,8 +29,12 @@ while action != "exit"
   action = gets.chomp.downcase
   case action 
   when "add" then puts "ADD"
-  when "list" then puts "LIST"
-  when "completed" then puts "COMPLETED"
+  when "list" 
+    list_todos(todos)
+    print_menu
+  when "completed"  
+    list_todos(todos, true)
+    print_menu
   when "toggle" then puts "TOGGLE"
   when "delete" then puts "DELETE"
   end
